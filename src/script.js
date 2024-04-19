@@ -158,7 +158,7 @@ checkoutBtn.addEventListener("click", function(){
             onClick: function(){} // Callback after click
           }).showToast();
 
-        return;
+        return; 
     } 
     
     if(cart.length === 0) return;

@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "npx tailwindcss -i ./styles/style.css -o ./styles/output.css --watch" 
+    "dev": "npx tailwindcss -i ./styles/style.css -o ./styles/output.css --watch",
+    "nodemon": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.0"
   }
 }
