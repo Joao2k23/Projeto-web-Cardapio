@@ -1,27 +1,35 @@
 import express from 'express'
 import conexao from '../infra/conexao.js'
+import cors from 'cors'
 
 const app = express()
 
-app.use(express.json()) //middleware
+app.use(cors())
+app.use(express.json())
 
+app.post("/order", (request, response) => {
+    const {total, products} = request.body
 
+    const sqlOrder = "INSERT INTO carpadio_teste.Orders SET ?"
+    conexao.query(sqlOrder, { total }, (erro, result) => {
+        if (erro) {
+            response.status(400).json({ 'erro': erro })
+        } else {
+            const orderId = result.insertId
 
-//rotas
-app.post("/order", (request, response) =>{
-    const {id, name, quantity, price, total} = request.body
+            products.forEach(product => {
+                const sqlProduct = "INSERT INTO carpadio_teste.OrderItems SET ?"
 
-    const cartInfo = request.body;
+                conexao.query(sqlProduct,{...product, order_id: orderId}, (erro, result)=> {
+                    if (erro) {
+                        response.status(400).json({'erro': erro})
+                    }
+                })
+            })
 
-    const sql = "INSERT INTO order SET ?"
-    conexao.query(sql, cartInfo, (erro, result) => {
-        if(erro) {
-            response.status(400).json({'erro': erro})
-        }
-        else{
-            response.status(201).json(resultado)
+            response.status(201).json({ orderId, result }) // Enviando o orderId na resposta
         }
     })
 })
 
-export default app
+export default app;

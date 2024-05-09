@@ -1,0 +1,13 @@
+POST http://localhost:3000/order
+Content-Type: application/json
+
+{
+    "total": 12.0,
+    "products": [
+        {
+            "name": "Coca",
+            "quantity": 2,
+            "price": 6.0
+        }
+    ]
+}

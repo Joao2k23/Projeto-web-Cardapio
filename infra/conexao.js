@@ -5,7 +5,7 @@ const conexao = mysql.createConnection({
     port:'3306',
     user:'root',
     password:'@Jgmb0485',
-    database:'cardapio'
+    database:'carpadio_teste'
 })
 
 conexao.connect((error) => {

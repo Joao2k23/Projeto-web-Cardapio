@@ -232,30 +232,31 @@ menuBtn.forEach(button => {
     });
 });
    
+
 checkoutBtn.addEventListener("click", function() {
     sendCartToServer();
 });
 
 function sendCartToServer(){
     const url = "http://localhost:3000/order"
-    const total = cartProduct.reduce((total,product) => total + (product.price * product.quantity), 0)
-    const data = {
-        total,
-        products: cartProduct.map(product => ({
-           ...product
-        }))
-    }
-
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data),
-          
-    }
-    fetch(url, options)
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+    cartProduct.forEach(item =>{
+        const data = cartProduct.map(item => ({
+            ...item,
+            price: item.price ? item.price.toString() : "0",
+            total: ((item.price ? parseFloat(item.price) : 0) * item.quantity).toString()
+        }));
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)    
+        }
+        fetch(url, options)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }) 
 }
+
+

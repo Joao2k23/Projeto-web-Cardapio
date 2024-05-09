@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "npx tailwindcss -i ./styles/style.css -o ./styles/output.css --watch",
-    "nodemon": "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "tailwindcss": "^3.4.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "mysql": "^2.18.1",
     "nodemon": "^3.1.0"
