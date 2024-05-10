@@ -229,9 +229,28 @@ menuBtn.forEach(button => {
                 price: productPrice,
             });
         }
+
     });
 });
-   
+
+//verifica se o item foi removido do carrinho para remover do cartProduct
+cartItemsContainer.addEventListener("click", function(event) {
+    if(event.target.classList.contains("remove-from-cart-btn")){
+        const productName = event.target.getAttribute("data-name"); //Obter o nome do produto clicado
+
+        const existingProductIndex = cartProduct.findIndex(item => item.name === productName);
+        if(existingProductIndex !== -1) { //Usar !== em vez de !=
+            const product = cartProduct[existingProductIndex];
+
+            if(product.quantity > 1){ //Corrigir o nome da propriedade quantity e usar > em vez de >>
+                product.quantity -= 1;
+            } else {
+                cartProduct.splice(existingProductIndex, 1); //Remover o item do array cartProduct usando splice
+            }
+        }
+    }
+})
+
 checkoutBtn.addEventListener("click", function() {
     sendCartToServer();
 });
